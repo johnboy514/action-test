@@ -1,6 +1,23 @@
 import React from 'react';
-import ActionComponent from './ActionComponent';
-import BonusActionComponent from './BonusActionComponent';
+// import ActionComponent from './ActionComponent';
+// import BonusActionComponent from './BonusActionComponent';
+
+
+const ActionComponent = ({ action, onActionSelect }) => {
+  return (
+    <button onClick={() => onActionSelect(action)}>
+      {action.name} - {action.description}
+    </button>
+  );
+};
+
+const BonusActionComponent = ({ bonusAction, onBonusActionSelect }) => {
+  return (
+    <button onClick={() => onBonusActionSelect(bonusAction)}>
+      {bonusAction.name} - {bonusAction.description}
+    </button>
+  );
+};
 
 const PlayerTurnActions = ({ actions, bonusActions, onSelectAction, onSelectBonusAction }) => {
   return (

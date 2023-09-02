@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router,  Route,  Routes,  Navigate} from "react-router-dom";
+import Home from "./GameComponent";
+// import Navbar from "./components/Navbar/Navbar";
+// import Footer from "./components/Footer/Footer";
+// import Zombies from "./components/Zombies/Zombies";
+// import ZombiesCharacterSheet from "./components/Zombies/ZombiesCharacterSheet";
+// import ZombiesCharacterSelect from "./components/Zombies/ZombiesCharacterSelect";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div   className="bg-image">
+    <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/zombies" element={<Zombies />} />
+          <Route path="/zombies-character-select/:campaign" element={<ZombiesCharacterSelect />} />
+          <Route path="/zombies-character-sheet/:id" element={<ZombiesCharacterSheet />} /> */}
+          <Route path="*" element={<Navigate to="/"/>} />
+        </Routes>
+    </Router>
     </div>
   );
 }

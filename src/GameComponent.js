@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PlayerTurnActions from './PlayerTurnActions';
+import { Button, Col, Form, Row } from "react-bootstrap";
 
 const GameComponent = () => {
   const [selectedAction, setSelectedAction] = useState(null);
@@ -37,9 +38,29 @@ const GameComponent = () => {
     // ... add more bonus actions
   ];
 
+
+  //--------------------------------------------Actions Buttons-------------------------------------------------------------------------------------------------------------------------------------
+const [moveActive, setMoveActive] = useState(false);
+const handleMove = () => {
+  setMoveActive(!moveActive);
+};
+const [bonusActive, setBonusActive] = useState(false);
+const handleBonus = () => {
+  setBonusActive(!bonusActive);
+};
+const [actionActive, setActionActive] = useState(false);
+const handleAction = () => {
+  setActionActive(!actionActive);
+};
+//--------------------------------------------Display---------------------------------------------------------------------------------------------------------------------------------------------
   return (
     <div>
       {/* Render game content here */}
+      <h1 style={{ fontSize: 28, backgroundPositionY: "450%", width: "300px", height: "95px", backgroundImage: 'url(../images/banner.png)', backgroundSize: "cover", backgroundRepeat: "no-repeat"}}className="text-dark">AlphaMale</h1> 
+      <Button onClick={handleMove} className="mx-1 fa-solid fa-shoe-prints" style={{ marginTop: "-60px", color: moveActive ? "black" : "#3de6d2" }} variant="secondary"></Button>
+      <Button onClick={handleBonus} className="mx-1 fa-solid fa-circle" style={{ marginTop: "-60px", color: bonusActive ? "black" : "#7bf94d" }} variant="secondary"></Button>
+      <Button onClick={handleAction} className="mx-1 fa-solid fa-square" style={{ marginTop: "-60px", color: actionActive ? "black" : "#ffb30f" }} variant="secondary"></Button>
+      <Button onClick={() => {handleAction(); handleBonus(); handleMove();}} className="mx-1 fa-solid fa-arrows-rotate" style={{ marginTop: "-60px", color: "#f71818" }} variant="secondary"></Button>
       <PlayerTurnActions
         actions={availableActions}
         bonusActions={availableBonusActions}
