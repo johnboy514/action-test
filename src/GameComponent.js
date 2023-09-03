@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PlayerTurnActions from './PlayerTurnActions';
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const GameComponent = () => {
   const [selectedAction, setSelectedAction] = useState(null);
@@ -15,6 +15,9 @@ const GameComponent = () => {
     setSelectedBonusAction(bonusAction);
     // Perform the logic associated with the selected bonus action
   };
+
+
+
 
   const availableActions = [
     { id: 1, name: 'Attack', description: 'Perform a basic melee or ranged attack.' },
@@ -38,38 +41,49 @@ const GameComponent = () => {
     // ... add more bonus actions
   ];
 
+  const isActionSelected = selectedAction !== null;
+  const isBonusActionSelected = selectedBonusAction !== null;
 
-  //--------------------------------------------Actions Buttons-------------------------------------------------------------------------------------------------------------------------------------
-const [moveActive, setMoveActive] = useState(false);
-const handleMove = () => {
-  setMoveActive(!moveActive);
-};
-const [bonusActive, setBonusActive] = useState(false);
-const handleBonus = () => {
-  setBonusActive(!bonusActive);
-};
-const [actionActive, setActionActive] = useState(false);
-const handleAction = () => {
-  setActionActive(!actionActive);
-};
+  const [moveActive, setMoveActive] = useState(false);
+  const handleMove = () => {
+    setMoveActive(!moveActive);
+    // Reset the selected move
+    setSelectedAction(null);
+    setSelectedBonusAction(null);
+  };
+
+  const [actionActive, setActionActive] = useState(false);
+  const handleAction = () => {
+    setActionActive(!actionActive);
+    // Reset the selected action
+    setSelectedBonusAction(null);
+  };
+
+  const [bonusActive, setBonusActive] = useState(false);
+  const handleBonus = () => {
+    setBonusActive(!bonusActive);
+    // Reset the selected bonus action
+    setSelectedAction(null);
+  };
+
 //--------------------------------------------Display---------------------------------------------------------------------------------------------------------------------------------------------
-  return (
-    <div>
-      {/* Render game content here */}
-      <h1 style={{ fontSize: 28, backgroundPositionY: "450%", width: "300px", height: "95px", backgroundImage: 'url(../images/banner.png)', backgroundSize: "cover", backgroundRepeat: "no-repeat"}}className="text-dark">Actions Left</h1> 
-      <Button onClick={handleMove} className="mx-1 fa-solid fa-shoe-prints" style={{ marginTop: "-60px", color: moveActive ? "black" : "#3de6d2" }} variant="secondary"></Button>
-      <Button onClick={handleBonus} className="mx-1 fa-solid fa-circle" style={{ marginTop: "-60px", color: bonusActive ? "black" : "#7bf94d" }} variant="secondary"></Button>
-      <Button onClick={handleAction} className="mx-1 fa-solid fa-square" style={{ marginTop: "-60px", color: actionActive ? "black" : "#ffb30f" }} variant="secondary"></Button>
-      <Button onClick={() => {handleAction(); handleBonus(); handleMove();}} className="mx-1 fa-solid fa-arrows-rotate" style={{ marginTop: "-60px", color: "#f71818" }} variant="secondary"></Button>
-      <PlayerTurnActions
-        actions={availableActions}
-        bonusActions={availableBonusActions}
-        onSelectAction={handleActionSelect}
-        onSelectBonusAction={handleBonusActionSelect}
-      />
-      {/* Render other game components */}
-    </div>
-  );
+return (
+  <div>
+    {/* Render game content here */}
+    <h1 style={{ fontSize: 28, backgroundPositionY: "450%", width: "300px", height: "95px", backgroundImage: 'url(../images/banner.png)', backgroundSize: "cover", backgroundRepeat: "no-repeat"}} className="text-dark">Actions Left</h1> 
+    <Button onClick={handleMove} className="mx-1 fas fa-shoe-prints" style={{ marginTop: "-60px", color: moveActive ? "black" : "#3de6d2" }} variant="secondary"></Button>
+    <Button onClick={handleAction} className="mx-1 fas fa-circle" style={{ marginTop: "-60px", color: actionActive || isActionSelected ? "black" : "#7bf94d" }} variant="secondary" disabled={isActionSelected}></Button>
+    <Button onClick={handleBonus} className="mx-1 fas fa-square" style={{ marginTop: "-60px", color: bonusActive || isBonusActionSelected ? "black" : "#ffb30f" }} variant="secondary" disabled={isBonusActionSelected}></Button>
+    <Button onClick={() => {handleAction(); handleBonus(); handleMove();}} className="mx-1 fas fa-arrows-rotate" style={{ marginTop: "-60px", color: "#f71818" }} variant="secondary"></Button>
+    <PlayerTurnActions
+      actions={availableActions}
+      bonusActions={availableBonusActions}
+      onSelectAction={handleActionSelect}
+      onSelectBonusAction={handleBonusActionSelect}
+    />
+    {/* Render other game components */}
+  </div>
+);
 };
 
 export default GameComponent;
