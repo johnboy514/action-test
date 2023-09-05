@@ -21,7 +21,7 @@ const GameComponent = () => {
 
   const availableActions = [
     { id: 1, name: 'Attack', description: 'Perform a basic melee or ranged attack.' },
-    { id: 2, name: 'Cast Spell', description: 'Cast a spell from your spellbook.' },
+    // { id: 2, name: 'Cast Spell', description: 'Cast a spell from your spellbook.' },
     { id: 3, name: 'Use Item', description: 'Use an item from your inventory.' },
     { id: 4, name: 'Hide', description: 'Attempt to hide from enemies.' },
     { id: 5, name: 'Disengage', description: 'Disengage from combat without provoking attacks of opportunity.' },
